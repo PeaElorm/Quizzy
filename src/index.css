@@ -13,6 +13,7 @@
 :root {
   --primary-color: #875fc0;
   --color-white: #fff;
+  --text-color: #5a6a8a;
   --color-primary-variant: #e5e5e5;
   --color-danger: #f4272c;
   --color-success: #7ee492;
@@ -38,4 +39,15 @@ body {
 .container{
 width: var(--container-width-lg);
 margin: 0 auto;
+}
+
+.card{
+  background: var(--color-white);
+  color: var(--text-color);
+}
+
+h1,
+h2,
+p{
+  text-align: center;
 }
