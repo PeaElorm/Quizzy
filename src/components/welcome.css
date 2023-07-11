@@ -1,0 +1,65 @@
+.container {
+  /* height: 40vh; */
+  margin: 20vh auto;
+}
+
+.card {
+  border-radius: 1rem;
+  box-shadow: 1px 2px 3px var(--text-color);
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.first {
+  padding: 3rem 0 2rem;
+}
+
+.logo {
+  margin-bottom: 1rem;
+  font-size: 5rem;
+}
+
+form {
+  text-align: center;
+}
+
+input[type="text"] {
+  border-bottom: 2px solid var(--color-primary-variant);
+  background-color: transparent;
+  font-size: 16px;
+  transition: border-bottom-color 0.3s;
+  padding: 0.5rem 1rem;
+  margin: 1rem 0 2rem;
+  width: 80%;
+  color: var(--text-color);
+}
+
+input[type="text"]:focus {
+  border-bottom-color: var(
+    --primary-color
+  ); /* Change the bottom border color on focus */
+}
+
+.greeting {
+  margin-bottom: 1rem;
+  padding: 3rem;
+}
+
+.btn {
+  background: var(--button-bg);
+  padding: 1rem;
+  font-size: 1.2rem;
+  text-align: center;
+  border-radius: 1rem;
+  color: var(--color-white);
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+@media screen and (max-width:600px) {
+    .card{
+        width: 100%;
+    }
+}
