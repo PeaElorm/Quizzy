@@ -1,5 +1,7 @@
 import { useState } from "react";
+import ReactDOM from "react-dom";
 import "./welcome.css";
+import Questions from "./Questions";
 
 function Welcome() {
   const [inputValue, setInputValue] = useState("");
@@ -14,9 +16,13 @@ function Welcome() {
     setUsername(inputValue);
     setInputValue("");
   };
+
+  const handleGetStarted = () => {
+    ReactDOM.render(<Questions />, document.getElementById("root"));
+  };
   return (
     <div className="container">
-      <h2>QUIZZY</h2>
+      <h2 className="logo">QUIZZY</h2>
       <div className="card">
         {username ? (
           <>
@@ -24,7 +30,10 @@ function Welcome() {
               <h1>Welcome {username} !</h1>
               <p>Let's get quizzy</p>
             </div>
-            <button className="btn">Get Started</button>
+
+            <button className="btn" onClick={handleGetStarted}>
+              Get Started
+            </button>
           </>
         ) : (
           <>
