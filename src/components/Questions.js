@@ -1,23 +1,35 @@
 import React, { useState } from "react";
+import ReactDOM from 'react-dom'
 import quizData from "./QuizData";
+import Result from "./Result";
 import "./questions.css";
 
 function Questions() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
+  const [isAnswered, setIsAnswered] = useState(false);
+  const [score, setScore] = useState(0);
 
   const handleNextQuestion = () => {
     setCurrentQuestion(currentQuestion + 1);
     setSelectedOption(null);
+    setIsAnswered(false);
   };
 
   const handleOptionSelect = (optionIndex) => {
     setSelectedOption(optionIndex);
-  };
+    setIsAnswered(true);
+    if (optionIndex === quizData[currentQuestion].correctAnswer) {
+      setScore(score + 10);
+    }
+    };
+    
+    const handleSubmit = () => {
+        ReactDOM.render(<Result />,document.getElementById('root')) }
 
   const currentQuestionData = quizData[currentQuestion];
   const isCorrect = selectedOption === currentQuestionData.correctAnswer;
-  const isAnswered = selectedOption !== null;
+  //   const isAnswered = selectedOption !== null;
 
   return (
     <main className="container">
@@ -28,7 +40,7 @@ function Questions() {
           max={quizData.length}
         ></progress>
         <h2 className="questions__score">
-          {currentQuestion + 1}/{quizData.length}
+          Score: {score}/{quizData.length * 10}
         </h2>
       </div>
       <div className="center">
@@ -53,11 +65,19 @@ function Questions() {
             </div>
           ))}
           {isAnswered ? (
-            <button className="btn next" onClick={handleNextQuestion}>
+            currentQuestion === quizData.length - 1 ? (
+              <button className="btn next" onClick={handleSubmit}>
+                Submit
+              </button>
+            ) : (
+              <button className="btn next" onClick={handleNextQuestion}>
+                Next
+              </button>
+            )
+          ) : (
+            <button disabled className="btn next ">
               Next
             </button>
-          ) : (
-            <button disabled className="btn next ">Next</button>
           )}
         </div>
       </div>

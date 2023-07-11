@@ -38,6 +38,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 0 1rem;
 }
 
 .next {
@@ -82,7 +83,12 @@
 
 .correct{
     background: var(--color-success);
-     color: var(--color-white);
+    color: var(--color-white); 
+}
+
+.incorrect:active,
+.correct:active{
+    pointer-events: none;
 }
 
 button:disabled,
