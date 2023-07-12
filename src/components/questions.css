@@ -38,6 +38,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 0 1rem;
 }
 
 .next {
@@ -53,12 +54,16 @@
   gap: 1rem;
 }
 
+
 .possible-answer-card {
   padding: 1rem;
   background: var(--color-primary-variant);
   width: 80%;
   margin: 0 auto;
   border-radius: 0.8rem;
+  color: var(--text-color);
+  font-size: 1rem;
+  font-family: "Poppins", sans-serif;
 }
 
 .possible-answer-card:hover{
@@ -67,11 +72,17 @@
     cursor: pointer;
 }
 
-.answers__card div:first-child {
+.possible-answer-card:disabled{
+  cursor:not-allowed;
+  background-color: #c7c4c4;
+  color: var(--color-primary-variant);
+}
+
+.answers__card button:first-child {
   margin-top: 1rem;
 }
 
-.answers__card div:last-child {
+.answers__card button:last-child {
   margin-bottom: 1rem;
 }
 
@@ -82,7 +93,7 @@
 
 .correct{
     background: var(--color-success);
-     color: var(--color-white);
+    color: var(--color-white); 
 }
 
 button:disabled,
@@ -90,7 +101,8 @@ button[disabled]{
   border: 1px solid #999999;
   background-color: #c7c4c4;
   color: #666666;
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
+  cursor: not-allowed;
 }
 
 

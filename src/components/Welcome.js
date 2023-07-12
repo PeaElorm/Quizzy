@@ -1,39 +1,48 @@
 import { useState } from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import "./welcome.css";
 import Questions from "./Questions";
+import Result from "./Result";
 
-function Welcome() {
+function Welcome({userName, setUserName, setPath}) {
   const [inputValue, setInputValue] = useState("");
-  const [username, setUsername] = useState("");
 
+
+  const navigateToPage = (path) => {
+    window.history.pushState(null, null, path);
+    setPath(path);
+  };
+  
   const handleChange = (e) => {
     setInputValue(e.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setUsername(inputValue);
+    setUserName(inputValue);
     setInputValue("");
   };
 
-  const handleGetStarted = () => {
-    ReactDOM.render(<Questions />, document.getElementById("root"));
-  };
+  // const handleGetStarted = () => {
+  //   ReactDOM.render(<Questions />, document.getElementById("root"));
+  // };
+
   return (
     <div className="container">
       <h2 className="logo">QUIZZY</h2>
       <div className="card">
-        {username ? (
+        {userName ? (
           <>
             <div className="greeting">
-              <h1>Welcome {username} !</h1>
+              <h1>Welcome {userName} !</h1>
               <p>Let's get quizzy</p>
             </div>
 
-            <button className="btn" onClick={handleGetStarted}>
-              Get Started
-            </button>
+            {/* <a href="/questions"> */}
+              <button className="btn" onClick={() => {
+                navigateToPage('/questions')
+              }}>Get Started</button>
+            {/* </a> */}
           </>
         ) : (
           <>
