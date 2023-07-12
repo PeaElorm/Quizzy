@@ -1,15 +1,20 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
 import quizData from "./QuizData";
 import welcome from "./Welcome";
 import Result from "./Result";
 import "./questions.css";
 
-function Questions({ score, setScore }) {
+function Questions({ score, setScore, setPath }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
   const [isAnswered, setIsAnswered] = useState(false);
   const [submit, setSubmit] = useState();
+
+
+  const navigateToPage = (path) => {
+    window.history.pushState(null, null, path);
+    setPath(path);
+  };
 
   const handleNextQuestion = () => {
     setCurrentQuestion(currentQuestion + 1);
@@ -17,16 +22,17 @@ function Questions({ score, setScore }) {
     setIsAnswered(false);
   };
 
-  const handleOptionSelect = (optionIndex) => {
-    setSelectedOption(optionIndex);
+  const handleOptionSelect = (optionId) => {
+    setSelectedOption(optionId);
     setIsAnswered(true);
-    if (optionIndex === quizData[currentQuestion].correctAnswer) {
+    const correctAnswer = quizData[currentQuestion].correctAnswer
+    if (optionId === quizData[currentQuestion].options[correctAnswer].id) {
       setScore(score + 10);
     }
   };
 
   const currentQuestionData = quizData[currentQuestion];
-  const isCorrect = selectedOption === currentQuestionData.correctAnswer;
+  const isCorrect = selectedOption === currentQuestionData.options[currentQuestionData.correctAnswer].id;
   //   const isAnswered = selectedOption !== null;
 
   return (
@@ -47,39 +53,37 @@ function Questions({ score, setScore }) {
           <p>{currentQuestionData.question}</p>
         </div>
         <div className="answers__card">
-          {currentQuestionData.options.map((option, index) => (
-            <div
+          {currentQuestionData.options.map((item, index) => (
+            <button
+              disabled={selectedOption && selectedOption !== index + 1}
               key={index}
-              className={`possible-answer-card ${
-                selectedOption === index
+              className={`possible-answer-card ${selectedOption === index + 1
                   ? isCorrect
                     ? "correct"
                     : "incorrect"
                   : ""
-              }`}
-              onClick={() => handleOptionSelect(index)}
+                }`}
+              onClick={() => handleOptionSelect(item.id)}
+
             >
-              <p>{option}</p>
-            </div>
+              <p>{item.option}</p>
+            </button>
           ))}
-          {isAnswered ? (
+          {
             currentQuestion === quizData.length - 1 ? (
               <button
+                disabled={!isAnswered}
                 className="btn next"
-                onClick={() => window.history.pushState(null, null, "/result")}
+                onClick={() => navigateToPage('/result')}
               >
                 Submit
               </button>
             ) : (
-              <button className="btn next" onClick={handleNextQuestion}>
+              <button disabled={!isAnswered} className="btn next" onClick={handleNextQuestion}>
                 Next
               </button>
             )
-          ) : (
-            <button disabled className="btn next ">
-              Next
-            </button>
-          )}
+           }
         </div>
       </div>
       <div className="bottom"></div>
