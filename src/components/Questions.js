@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import ReactDOM from 'react-dom'
+import ReactDOM from "react-dom";
 import quizData from "./QuizData";
+import welcome from "./Welcome";
 import Result from "./Result";
 import "./questions.css";
 
-function Questions() {
+function Questions({ score, setScore }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
   const [isAnswered, setIsAnswered] = useState(false);
-  const [score, setScore] = useState(0);
+  const [submit, setSubmit] = useState();
 
   const handleNextQuestion = () => {
     setCurrentQuestion(currentQuestion + 1);
@@ -22,10 +23,7 @@ function Questions() {
     if (optionIndex === quizData[currentQuestion].correctAnswer) {
       setScore(score + 10);
     }
-    };
-    
-    const handleSubmit = () => {
-        ReactDOM.render(<Result />,document.getElementById('root')) }
+  };
 
   const currentQuestionData = quizData[currentQuestion];
   const isCorrect = selectedOption === currentQuestionData.correctAnswer;
@@ -66,7 +64,10 @@ function Questions() {
           ))}
           {isAnswered ? (
             currentQuestion === quizData.length - 1 ? (
-              <button className="btn next" onClick={handleSubmit}>
+              <button
+                className="btn next"
+                onClick={() => window.history.pushState(null, null, "/result")}
+              >
                 Submit
               </button>
             ) : (
@@ -87,3 +88,4 @@ function Questions() {
 }
 
 export default Questions;
+// export { score };

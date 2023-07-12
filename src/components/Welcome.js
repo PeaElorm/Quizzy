@@ -1,7 +1,8 @@
 import { useState } from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import "./welcome.css";
 import Questions from "./Questions";
+import Result from "./Result";
 
 function Welcome() {
   const [inputValue, setInputValue] = useState("");
@@ -17,9 +18,10 @@ function Welcome() {
     setInputValue("");
   };
 
-  const handleGetStarted = () => {
-    ReactDOM.render(<Questions />, document.getElementById("root"));
-  };
+  // const handleGetStarted = () => {
+  //   ReactDOM.render(<Questions />, document.getElementById("root"));
+  // };
+
   return (
     <div className="container">
       <h2 className="logo">QUIZZY</h2>
@@ -31,9 +33,9 @@ function Welcome() {
               <p>Let's get quizzy</p>
             </div>
 
-            <button className="btn" onClick={handleGetStarted}>
-              Get Started
-            </button>
+            <a href="/questions">
+              <button className="btn">Get Started</button>
+            </a>
           </>
         ) : (
           <>

@@ -1,0 +1,38 @@
+.result-container {
+  display: flex;
+}
+
+.result-card {
+  background: var(--color-white);
+  color: var(--button-bg);
+  border-radius: 1rem;
+}
+
+.trophy,
+.emoji {
+  background: var(--primary-color);
+  border-radius: 1rem;
+  border: 1px solid var(--color-white);
+  color: var(--color-white);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding:  1rem;
+}
+
+img {
+  width: 200px;
+  height: 250px;
+}
+
+.score-display h2{
+    size: 3rem;
+}
+
+.score-display{
+    background: var(--primary-color);
+    width: 4rem;
+    border-radius: 50%;
+    padding: 4rem;
+}
