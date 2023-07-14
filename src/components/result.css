@@ -60,6 +60,16 @@ h2.score {
   margin-top: 1rem;
 }
 
+@media screen and (max-width: 1024px) {
+  h2.score {
+    font-size: 2rem;
+  }
+
+  .result-header {
+    font-size: 1.5rem;
+  }
+}
+
 @media screen and (max-width: 600px) {
   .score-display {
     margin: 1rem;
@@ -71,5 +81,9 @@ h2.score {
 
   h2.score {
     font-size: 2rem;
+  }
+
+  .result-header {
+    font-size: 1.5rem;
   }
 }
