@@ -36,18 +36,18 @@ body {
   color: var(--color-white);
 }
 
-.container{
-width: var(--container-width-lg);
-margin: 0 auto;
+.container {
+  width: var(--container-width-lg);
+  margin: 0 auto;
 }
 
-.card{
+.card {
   background: var(--color-white);
   color: var(--text-color);
 }
 
 h1,
 h2,
-p{
+p {
   text-align: center;
 }

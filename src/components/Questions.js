@@ -10,7 +10,6 @@ function Questions({ score, setScore, setPath }) {
   const [isAnswered, setIsAnswered] = useState(false);
   const [submit, setSubmit] = useState();
 
-
   const navigateToPage = (path) => {
     window.history.pushState(null, null, path);
     setPath(path);
@@ -25,14 +24,16 @@ function Questions({ score, setScore, setPath }) {
   const handleOptionSelect = (optionId) => {
     setSelectedOption(optionId);
     setIsAnswered(true);
-    const correctAnswer = quizData[currentQuestion].correctAnswer
+    const correctAnswer = quizData[currentQuestion].correctAnswer;
     if (optionId === quizData[currentQuestion].options[correctAnswer].id) {
       setScore(score + 10);
     }
   };
 
   const currentQuestionData = quizData[currentQuestion];
-  const isCorrect = selectedOption === currentQuestionData.options[currentQuestionData.correctAnswer].id;
+  const isCorrect =
+    selectedOption ===
+    currentQuestionData.options[currentQuestionData.correctAnswer].id;
   //   const isAnswered = selectedOption !== null;
 
   return (
@@ -41,7 +42,7 @@ function Questions({ score, setScore, setPath }) {
         <progress
           className="progress-bar"
           value={currentQuestion + 1}
-          max={quizData.length}
+          max={quizData.length + 1}
         ></progress>
         <h2 className="questions__score">
           Score: {score}/{quizData.length * 10}
@@ -57,33 +58,35 @@ function Questions({ score, setScore, setPath }) {
             <button
               disabled={selectedOption && selectedOption !== index + 1}
               key={index}
-              className={`possible-answer-card ${selectedOption === index + 1
+              className={`possible-answer-card ${
+                selectedOption === index + 1
                   ? isCorrect
                     ? "correct"
                     : "incorrect"
                   : ""
-                }`}
+              }`}
               onClick={() => handleOptionSelect(item.id)}
-
             >
               <p>{item.option}</p>
             </button>
           ))}
-          {
-            currentQuestion === quizData.length - 1 ? (
-              <button
-                disabled={!isAnswered}
-                className="btn next"
-                onClick={() => navigateToPage('/result')}
-              >
-                Submit
-              </button>
-            ) : (
-              <button disabled={!isAnswered} className="btn next" onClick={handleNextQuestion}>
-                Next
-              </button>
-            )
-           }
+          {currentQuestion === quizData.length - 1 ? (
+            <button
+              disabled={!isAnswered}
+              className="btn next"
+              onClick={() => navigateToPage("/result")}
+            >
+              Submit
+            </button>
+          ) : (
+            <button
+              disabled={!isAnswered}
+              className="btn next"
+              onClick={handleNextQuestion}
+            >
+              Next
+            </button>
+          )}
         </div>
       </div>
       <div className="bottom"></div>
